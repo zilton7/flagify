@@ -1,0 +1,21 @@
+body {
+  width: 100%;
+}
+
+.flag-in-question {
+  width: 30%;
+}
+
+#flag-image {
+  max-width: 100%;
+}
+
+.variant {
+  border: solid 0.1rem black;
+}
+
+.variant:hover {
+  cursor: pointer;
+  background: black;
+  color: white;
+}

@@ -1,7 +1,20 @@
 // https://www.countries-ofthe-world.com/TLD-list.html
 
 function startGame() {
-    return pickAnswerVariants(data);
+    assignData(pickAnswerVariants(data));
+}
+
+function assignData(data){
+    document.getElementById('variant-1').innerHTML = data[0].name;
+    document.getElementById('variant-2').innerHTML = data[1].name;
+    document.getElementById('variant-3').innerHTML = data[2].name;
+    document.getElementById('variant-4').innerHTML = data[3].name;
+
+    data.forEach(obj => {
+        if('correct' in obj){
+        document.getElementById('flag-image').src = `./assets/flags/${obj.tld}.svg`;
+    }
+    })
 }
 
 function pickAnswerVariants(obj){
@@ -14,12 +27,11 @@ function pickAnswerVariants(obj){
 
     for(let i=0; i < 3;){
         let choice = pickFlag(obj);
-        if(choice != correct){
+        if(choice != correct && !variants.includes(choice)){
             variants.push(pickFlag(obj));
             i++;
         }
     }
-
     return shuffleArray(variants);
 }
 
