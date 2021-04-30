@@ -28,7 +28,7 @@ function pickAnswerVariants(obj){
     for(let i=0; i < 3;){
         let choice = pickFlag(obj);
         if(choice != correct && !variants.includes(choice)){
-            variants.push(pickFlag(obj));
+            variants.push(choice);
             i++;
         }
     }
