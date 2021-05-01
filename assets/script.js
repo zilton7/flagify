@@ -7,17 +7,15 @@ function startGame() {
     assignData(gatherAnswerVariants(data));
 }
 
+// Gather Variants & assign data
 function assignData(data){
     document.getElementById('variant-1').innerHTML = data[0].name;
     document.getElementById('variant-2').innerHTML = data[1].name;
     document.getElementById('variant-3').innerHTML = data[2].name;
     document.getElementById('variant-4').innerHTML = data[3].name;
 
-    data.forEach(obj => {
-        if('correct' in obj){
-        document.getElementById('flag-image').src = `./assets/flags/${obj.tld}.svg`;
-    }
-    })
+    document.getElementById('flag-image').src = `./assets/flags/${correct.tld}.svg`;
+
 }
 
 function gatherAnswerVariants(obj){
@@ -40,6 +38,30 @@ function pickFlag(arr){
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function checkChoice(event){
+    if(event.innerHTML == correct.name){
+        assignResponse('correct');
+        window.location.reload();
+        event.style.color = 'green';
+    } else {
+        assignResponse('false');
+        event.style.color = 'red';
+    };
+}
+
+function assignResponse(response_type){
+    let response_div = document.getElementById('response-div')
+    response_div.innerHTML = '';
+    if(response_type == 'correct'){
+        response_div.innerHTML = "<span class='green'>Correct Answer!</span>"
+        response_div.classList.add('green')
+    } else {
+        response_div.innerHTML = "<span class='red'>Wrong Answer. Try again!</span>"
+        response_div.classList.add('red')
+    }
+}
+
+// Miscellaneous
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));

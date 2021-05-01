@@ -10,20 +10,22 @@
 </head>
 
 <body>
-    <div class="flag-in-question">
-        <img id="flag-image" src="" alt="">
-    </div>
-    <div class="variants">
-        <div>
-            <span id="variant-1" class="variant"></span>
-            <span id="variant-2" class="variant"></span>
+    <main>
+        <div class="flag">
+            <img id="flag-image" src="" alt="">
         </div>
-        <div>
-            <span id="variant-3" class="variant"></span>
-            <span id="variant-4" class="variant"></span>
+        <div class="response" id="response-div"></div>
+        <div class="variants">
+            <div class="variants-top">
+                <span id="variant-1" class="variant" onclick="checkChoice(this);"></span>
+                <span id="variant-2" class="variant" onclick="checkChoice(this);"></span>
+            </div>
+            <div class="variants-bottom">
+                <span id="variant-3" class="variant" onclick="checkChoice(this);"></span>
+                <span id="variant-4" class="variant" onclick="checkChoice(this);"></span>
+            </div>
         </div>
-    </div>
-
+    </main>
     <script src="./assets/script.js"></script>
 </body>
 
