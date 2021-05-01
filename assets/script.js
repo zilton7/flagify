@@ -38,14 +38,17 @@ function pickFlag(arr){
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
+// Check and respond
 function checkChoice(event){
     if(event.innerHTML == correct.name){
         assignResponse('correct');
-        window.location.reload();
-        event.style.color = 'green';
+        event.classList.add('variant-green')
+        reloadPage()
     } else {
         assignResponse('false');
-        event.style.color = 'red';
+        event.classList.add('variant-red')
+        event.removeAttribute("onclick");
+        reloadPage()
     };
 }
 
@@ -56,9 +59,15 @@ function assignResponse(response_type){
         response_div.innerHTML = "<span class='green'>Correct Answer!</span>"
         response_div.classList.add('green')
     } else {
-        response_div.innerHTML = "<span class='red'>Wrong Answer. Try again!</span>"
+        response_div.innerHTML = "<span class='red '>Wrong Answer. Try again!</span>"
         response_div.classList.add('red')
     }
+}
+
+function reloadPage(){
+    sleep(500).then(() => {
+    window.location.reload();
+})
 }
 
 // Miscellaneous
@@ -80,6 +89,12 @@ function containsObject(obj, list) {
     return false;
 }
 
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
+
+  
+// Data object
 let data = [
     { tld: 'ad', name: 'Andorra' },
     { tld: 'ae', name: 'United Arab Emirates' },
