@@ -1,7 +1,10 @@
 // https://www.countries-ofthe-world.com/TLD-list.html
 
+let correct;
+let variants = [];
+
 function startGame() {
-    assignData(pickAnswerVariants(data));
+    assignData(gatherAnswerVariants(data));
 }
 
 function assignData(data){
@@ -17,28 +20,24 @@ function assignData(data){
     })
 }
 
-function pickAnswerVariants(obj){
-    let correct;
-    let variants = [];
-
+function gatherAnswerVariants(obj){
     correct = pickFlag(obj);
-    correct.correct = 'true';
+    console.log(`correct is: ${ correct.name }`);
     variants.push(correct);
 
     for(let i=0; i < 3;){
         let choice = pickFlag(obj);
-        if(choice != correct && !variants.includes(choice)){
+        if(!containsObject(choice, variants)){
             variants.push(choice);
             i++;
         }
     }
+    console.log(variants)
     return shuffleArray(variants);
 }
 
-function pickFlag(obj){
-    let keys = Object.keys(obj);
-    let choice = keys[ keys.length * Math.random() << 0]
-    return { 'tld': choice, 'name': obj[choice] };
+function pickFlag(arr){
+    return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function shuffleArray(array) {
@@ -49,22 +48,32 @@ function shuffleArray(array) {
     return array;
 }
 
-let data = {
-    'ad': 'Andorra',
-    'ae': 'United Arab Emirates',
-    'af': 'Afghanistan',
-    'ag': 'Antigua and Barbuda',
-    'ai': 'Anguilla (UK)',
-    'al': 'Albania',
-    'am': 'Armenia',
-    'ao': 'Angola',
-    'ar': 'Argentina',
-    'as': 'American Samoa (USA)',
-    'at': 'Austria',
-    'au': 'Australia',
-    'aw': 'Aruba (Netherlands)',
-    'ax': 'Åland Islands (Finland)',
-    'az': 'Azerbaijan'
+function containsObject(obj, list) {
+    for (let i = 0; i < list.length; i++) {
+        if (list[i] === obj) {
+            return true;
+        }
+    }
+
+    return false;
 }
+
+let data = [
+    { tld: 'ad', name: 'Andorra' },
+    { tld: 'ae', name: 'United Arab Emirates' },
+    { tld: 'af', name: 'Afghanistan' },
+    { tld: 'ag', name: 'Antigua and Barbuda' },
+    { tld: 'ai', name: 'Anguilla (UK)' },
+    { tld: 'al', name: 'Albania' },
+    { tld: 'am', name: 'Armenia' },
+    { tld: 'ao', name: 'Angola' },
+    { tld: 'ar', name: 'Argentina' },
+    { tld: 'as', name: 'American Samoa (USA)' },
+    { tld: 'at', name: 'Austria' },
+    { tld: 'au', name: 'Australia' },
+    { tld: 'aw', name: 'Aruba (Netherlands)' },
+    { tld: 'ax', name: 'Åland Islands (Finland)' },
+    { tld: 'az', name: 'Azerbaijan' }
+];
 
 console.log(startGame());
