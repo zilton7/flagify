@@ -25,11 +25,11 @@ main {
 
 .response {
   height: 10vh;
-  border: solid 0.1rem black;
   font-size: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 1rem 0;
 }
 
 .variants {
@@ -65,12 +65,32 @@ main {
   color: white;
 }
 
-.red {
+.variant-red {
+  color: black;
   background-color: red;
-  color: white;
+  text-decoration: line-through;
+}
+
+.variant-red:hover {
+  color: red;
+  opacity: 0.7;
+  cursor: default;
+}
+
+.red {
+  color: red;
 }
 
 .green {
-  background-color: green;
+  color: green;
+}
+
+.variant-green {
   color: white;
+  background-color: green;
+}
+
+.variant-green:hover {
+  color: white;
+  background-color: green;
 }
