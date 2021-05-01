@@ -1,6 +1,6 @@
 # Flagify
 
-Flagify is a simple vanilla JavaScript country flag guesser game.
+Flagify is a simple vanilla JavaScript country flag guessing game.
 
 
 ## Usage
