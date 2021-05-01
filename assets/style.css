@@ -4,6 +4,7 @@ html {
 
 body {
   height: 100vh;
+  background-color: whitesmoke;
 }
 
 header {
@@ -48,7 +49,7 @@ main {
 .flag {
   height: 50%;
   margin: auto;
-  /* border: solid 1rem black; */
+  /* border: solid 0.5rem black; */
 }
 
 .flag img {
