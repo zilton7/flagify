@@ -6,10 +6,33 @@ body {
 }
 
 header {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
 }
 
 header h2 {
   font-size: 3rem;
+  margin: auto;
+  background-color: black;
+  color: white;
+}
+
+.correct-wrong {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 1.5rem;
+}
+
+#correct-count {
+  color: green;
+}
+
+#wrong-count {
+  color: red;
 }
 
 main {
