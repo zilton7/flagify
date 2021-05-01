@@ -5,6 +5,13 @@ html {
 body {
 }
 
+header {
+}
+
+header h2 {
+  font-size: 3rem;
+}
+
 main {
   display: flex;
   width: 50%;

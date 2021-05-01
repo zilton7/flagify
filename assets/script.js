@@ -2,9 +2,21 @@
 
 let correct;
 let variants = [];
+let round = 0;
+let correct_count = 0;
+let wrong_count = 0;
 
 function startGame() {
+    round ++;
+    variants = [];
+    assignRound();
     assignData(gatherAnswerVariants(data));
+}
+
+function assignRound(){
+    document.getElementById('round-count').innerHTML = `Round ${round}`;
+    document.getElementById('correct-count').innerHTML = `Correct: ${correct_count}`;
+    document.getElementById('wrong-count').innerHTML = `Wrong: ${wrong_count}`;
 }
 
 // Gather Variants & assign data
@@ -43,10 +55,12 @@ function checkChoice(event){
     if(event.innerHTML == correct.name){
         assignResponse('correct');
         event.classList.add('variant-green')
+        correct_count++;
         nextRound()
     } else {
         assignResponse('false');
         event.classList.add('variant-red')
+        wrong_count++;
         nextRound()
     };
 }
@@ -79,13 +93,11 @@ function resetResponse(){
     response_div.classList.remove('red');
 }
 
-
-
 function nextRound(){
     sleep(500).then(() => {
-        startGame();
         resetResponse();
         resetVariants();
+        startGame();
         })
 }
 
@@ -112,7 +124,6 @@ const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
   }
 
-  
 // Data object
 let data = [
     { tld: 'ad', name: 'Andorra' },
