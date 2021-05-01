@@ -43,13 +43,19 @@ function checkChoice(event){
     if(event.innerHTML == correct.name){
         assignResponse('correct');
         event.classList.add('variant-green')
-        reloadPage()
+        nextRound()
     } else {
         assignResponse('false');
         event.classList.add('variant-red')
-        event.removeAttribute("onclick");
-        reloadPage()
+        nextRound()
     };
+}
+
+function resetVariants(){
+    document.getElementById('variant-1').className = "variant";
+    document.getElementById('variant-2').className = "variant";
+    document.getElementById('variant-3').className = "variant";
+    document.getElementById('variant-4').className = "variant";
 }
 
 function assignResponse(response_type){
@@ -64,10 +70,23 @@ function assignResponse(response_type){
     }
 }
 
-function reloadPage(){
+function resetResponse(){
+    let response_div = document.getElementById('response-div');
+    response_div.innerHTML = '';
+    response_div.innerHTML = "";
+    response_div.classList.remove('green');
+    response_div.innerHTML = "";
+    response_div.classList.remove('red');
+}
+
+
+
+function nextRound(){
     sleep(500).then(() => {
-    window.location.reload();
-})
+        startGame();
+        resetResponse();
+        resetVariants();
+        })
 }
 
 // Miscellaneous
