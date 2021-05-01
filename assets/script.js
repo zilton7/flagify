@@ -1,4 +1,5 @@
 let correct;
+let correct_index; // save the index to be able to remove it from data list
 let variants = [];
 let round = 0;
 let correct_count = 0;
@@ -7,16 +8,17 @@ let wrong_count = 0;
 function startGame() {
   round++;
   variants = [];
-  assignRound();
+  assignRoundData();
   assignData(gatherAnswerVariants(data));
 }
 
-function assignRound() {
+function assignRoundData() {
   document.getElementById("round-count").innerHTML = `Round ${round}`;
   document.getElementById(
     "correct-count"
   ).innerHTML = `Correct: ${correct_count}`;
   document.getElementById("wrong-count").innerHTML = `Wrong: ${wrong_count}`;
+  document.getElementById("left-count").innerHTML = `Left: ${data.length}`;
 }
 
 // Gather Variants & assign data
@@ -31,13 +33,15 @@ function assignData(data) {
   ).src = `./assets/flags/${correct.tld}.svg`;
 }
 
-function gatherAnswerVariants(obj) {
-  correct = pickFlag(obj);
-  console.log(`correct is: ${correct.name}`);
+function gatherAnswerVariants(arr) {
+  rand_int = Math.floor(Math.random() * arr.length);
+  correct_index = rand_int;
+  correct = arr[rand_int]; // Assign correct answer flag data to global variable
+  //   console.log(`correct is: ${correct.name}`);
   variants.push(correct);
 
   for (let i = 0; i < 3; ) {
-    let choice = pickFlag(obj);
+    let choice = arr[Math.floor(Math.random() * arr.length)]; //Pick flags randomly
     if (!containsObject(choice, variants)) {
       variants.push(choice);
       i++;
@@ -47,9 +51,7 @@ function gatherAnswerVariants(obj) {
   return shuffleArray(variants);
 }
 
-function pickFlag(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+function removeFlagFromData() {}
 
 // Check and respond
 function checkChoice(event) {
@@ -57,6 +59,7 @@ function checkChoice(event) {
     assignResponse("correct");
     event.classList.add("variant-green");
     correct_count++;
+    data.splice(correct_index, 1);
     nextRound();
   } else {
     assignResponse("false");
