@@ -14,7 +14,9 @@
 <body>
     <header>
         <p>Flagify v1.0</p>
-        <h2 id="round-count">Round 1</h2>
+        <!-- Trigger/Open The HighScore Modal -->
+        <a href="#" id="highScoreBtn">High Scores</a>
+        <h2 id="round-count">Round </h2>
         <div class="correct-wrong">
             <h3 id="left-count">Left: 0</h3>
             <h3 id="correct-count">Correct: 0</h3>
@@ -37,22 +39,21 @@
             </div>
         </div>
 
-        <!-- Trigger/Open The Modal -->
-        <button id="myBtn">Open Modal</button>
-
         <!-- The Modal -->
         <div id="highScoreModal" class="modal">
 
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
+                <table id="highScoreTable">
+
+                </table>
             </div>
+        </div>
 
     </main>
 
     <!-- main script file -->
-    <script src="./assets/script.js"></script>
     <script src="./assets/modal.js"></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -101,6 +102,7 @@
             });
 
     </script> -->
+    <script src="./assets/script.js"></script>
 
 
 </body>

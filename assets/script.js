@@ -4,12 +4,13 @@ let variants = [];
 let round = 0;
 let correct_count = 0;
 let wrong_count = 0;
-let high_scores;
+let high_scores = [];
 
 function startGame() {
   round++;
   variants = [];
   assignRoundData();
+  readHighScores();
   assignData(gatherAnswerVariants(data));
 }
 
@@ -109,14 +110,17 @@ function nextRound() {
 
 // High Scores
 function readHighScores() {
+  let table = document.getElementById("highScoreTable");
   db.collection("high-scores")
     .get()
     .then((querySnapshot) => {
-      high_scores = querySnapshot;
+      querySnapshot.forEach((doc) => {
+        table.innerHTML += `<tr><td>${doc.data().username}</td><td>${
+          doc.data().correct
+        }</td><td>${doc.data().wrong}</td></tr>`;
+      });
     });
 }
-
-function assignHighScores() {}
 
 // Stopwatch
 // https://www.ostraining.com/blog/coding/stopwatch/
