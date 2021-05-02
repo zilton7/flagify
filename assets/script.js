@@ -5,13 +5,26 @@ let round = 0;
 let correct_count = 0;
 let wrong_count = 0;
 let high_scores = [];
+let lives = 3;
 
 function startGame() {
-  round++;
-  variants = [];
-  assignRoundData();
-  readHighScores();
-  assignData(gatherAnswerVariants(data));
+  gameLoop();
+}
+
+function gameLoop() {
+  if (lives > 0) {
+    round++;
+    variants = [];
+    assignRoundData();
+    readHighScores();
+    assignData(gatherAnswerVariants(data));
+  } else {
+    gameOver();
+  }
+}
+
+function gameOver() {
+  document.getElementsByTagName("body")[0].innerHTML = "<h3>GAME OVER</h3>";
 }
 
 function assignRoundData() {
@@ -67,6 +80,7 @@ function checkChoice(event) {
     assignResponse("false");
     event.classList.add("variant-red");
     wrong_count++;
+    lives--;
     nextRound();
   }
 }
