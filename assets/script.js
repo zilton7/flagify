@@ -110,14 +110,20 @@ function nextRound() {
 
 // High Scores
 function readHighScores() {
-  let table = document.getElementById("highScoreTable");
+  let table = document
+    .getElementById("highScoreTable")
+    .getElementsByTagName("tbody")[0];
+  let iter = 1;
+  table.innerHTML = "";
+  table.innerHTML =
+    "<thead><tr><th>#</th><th>Username</th><th>Correct</th><th>Wrong</th></tr></thead>";
   db.collection("high-scores")
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        table.innerHTML += `<tr><td>${doc.data().username}</td><td>${
-          doc.data().correct
-        }</td><td>${doc.data().wrong}</td></tr>`;
+        table.innerHTML += `<tr><td>${iter}</td><td>${doc.data().username}</td>
+        <td>${doc.data().correct}</td><td>${doc.data().wrong}</td></tr>`;
+        iter++;
       });
     });
 }
@@ -151,8 +157,6 @@ const sleep = (milliseconds) => {
 const generate_string = () => {
   return Math.random().toString(32).substr(2, 22);
 };
-
-// Top Scores
 
 // https://www.countries-ofthe-world.com/TLD-list.html
 // Data object
