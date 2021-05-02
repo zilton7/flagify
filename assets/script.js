@@ -7,6 +7,7 @@ let wrong_count = 0;
 let high_scores = [];
 let last_high_score;
 let lives = 1;
+let player = "Guest";
 
 function startGame() {
   readHighScores();
@@ -152,11 +153,16 @@ function sortHighScores(arr) {
 function isHighScore() {
   let sort_arr = [
     last_high_score,
-    { username: "current_player", correct: correct_count, wrong: wrong_count },
+    { username: player, correct: correct_count, wrong: wrong_count },
   ];
   let sorted_array = sortHighScores(sort_arr);
-  if (sort_arr[0] === sorted_array[0]) {
-    alert("no high score");
+  if (high_scores.length >= 10) {
+    if (sort_arr[0] === sorted_array[0]) {
+      alert("no high score");
+    } else {
+      alert("high score!!!");
+      updateHighScore(sort_arr[1]);
+    }
   } else {
     alert("high score!!!");
     updateHighScore(sort_arr[1]);
