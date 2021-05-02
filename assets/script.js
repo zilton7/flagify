@@ -5,9 +5,11 @@ let round = 0;
 let correct_count = 0;
 let wrong_count = 0;
 let high_scores = [];
-let lives = 3;
+let last_high_score;
+let lives = 1;
 
 function startGame() {
+  readHighScores();
   gameLoop();
 }
 
@@ -16,7 +18,6 @@ function gameLoop() {
     round++;
     variants = [];
     assignRoundData();
-    readHighScores();
     assignData(gatherAnswerVariants(data));
   } else {
     gameOver();
@@ -25,6 +26,7 @@ function gameLoop() {
 
 function gameOver() {
   document.getElementsByTagName("main")[0].innerHTML = "<h3>GAME OVER</h3>";
+  isHighScore();
 }
 
 function assignRoundData() {
@@ -123,17 +125,59 @@ function nextRound() {
 
 // High Scores
 function readHighScores() {
+  high_scores = [];
   db.collection("high-scores")
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        high_scores.push(doc);
+        high_scores.push({
+          id: doc.id,
+          username: doc.data().username,
+          correct: doc.data().correct,
+          wrong: doc.data().wrong,
+        });
       });
       assignHighScores();
     });
 }
 
+function sortHighScores(arr) {
+  let res = [...arr].sort((a, b) => {
+    return b.correct - a.correct;
+  });
+  last_high_score = res[res.length - 1];
+  return res;
+}
+
+function isHighScore() {
+  let sort_arr = [
+    last_high_score,
+    { username: "current_player", correct: correct_count, wrong: wrong_count },
+  ];
+  let sorted_array = sortHighScores(sort_arr);
+  if (sort_arr[0] === sorted_array[0]) {
+    alert("no high score");
+  } else {
+    alert("high score!!!");
+    updateHighScore(sort_arr[1]);
+  }
+}
+
+function updateHighScore(replacement) {
+  // Add a new document in collection "cities"
+  db.collection("high-scores")
+    .doc(last_high_score.id)
+    .set(replacement)
+    .then(() => {
+      console.log("Document successfully written!");
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    });
+}
+
 function assignHighScores() {
+  high_scores = sortHighScores(high_scores);
   let table = document
     .getElementById("highScoreTable")
     .getElementsByTagName("tbody")[0];
@@ -142,8 +186,9 @@ function assignHighScores() {
   table.innerHTML =
     "<thead><tr><th>#</th><th>Username</th><th>Correct</th><th>Wrong</th></tr></thead>";
   high_scores.forEach((score) => {
-    table.innerHTML += `<tr><td>${iter}</td><td>${score.data().username}</td>
-  <td>${score.data().correct}</td><td>${score.data().wrong}</td></tr>`;
+    table.innerHTML += `<tr><td>${iter}</td><td>${score.username}</td>
+  <td>${score.correct}</td><td>${score.wrong}</td></tr>`;
+    iter++;
   });
 }
 
