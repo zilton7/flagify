@@ -24,7 +24,7 @@ function gameLoop() {
 }
 
 function gameOver() {
-  document.getElementsByTagName("body")[0].innerHTML = "<h3>GAME OVER</h3>";
+  document.getElementsByTagName("main")[0].innerHTML = "<h3>GAME OVER</h3>";
 }
 
 function assignRoundData() {
@@ -62,7 +62,6 @@ function gatherAnswerVariants(arr) {
       i++;
     }
   }
-  console.log(variants);
   return shuffleArray(variants);
 }
 
@@ -124,6 +123,17 @@ function nextRound() {
 
 // High Scores
 function readHighScores() {
+  db.collection("high-scores")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        high_scores.push(doc);
+      });
+      assignHighScores();
+    });
+}
+
+function assignHighScores() {
   let table = document
     .getElementById("highScoreTable")
     .getElementsByTagName("tbody")[0];
@@ -131,15 +141,10 @@ function readHighScores() {
   table.innerHTML = "";
   table.innerHTML =
     "<thead><tr><th>#</th><th>Username</th><th>Correct</th><th>Wrong</th></tr></thead>";
-  db.collection("high-scores")
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        table.innerHTML += `<tr><td>${iter}</td><td>${doc.data().username}</td>
-        <td>${doc.data().correct}</td><td>${doc.data().wrong}</td></tr>`;
-        iter++;
-      });
-    });
+  high_scores.forEach((score) => {
+    table.innerHTML += `<tr><td>${iter}</td><td>${score.data().username}</td>
+  <td>${score.data().correct}</td><td>${score.data().wrong}</td></tr>`;
+  });
 }
 
 // Stopwatch
