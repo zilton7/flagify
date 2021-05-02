@@ -106,6 +106,9 @@ function nextRound() {
   });
 }
 
+// Stopwatch
+// https://www.ostraining.com/blog/coding/stopwatch/
+
 // Miscellaneous
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -130,6 +133,7 @@ const sleep = (milliseconds) => {
 };
 
 // https://www.countries-ofthe-world.com/TLD-list.html
+// Flags to fix: dk,se,sk mo?, remove: uk
 // Data object
 let data = [
   { tld: "ad", name: "Andorra" },
