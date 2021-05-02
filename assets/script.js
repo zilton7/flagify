@@ -198,6 +198,10 @@ function assignHighScores() {
   });
 }
 
+function assignName(event) {
+  player = event.value;
+}
+
 // Stopwatch
 // https://www.ostraining.com/blog/coding/stopwatch/
 

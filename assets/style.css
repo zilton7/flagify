@@ -23,6 +23,16 @@ header h2 {
   color: white;
 }
 
+.header-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name-input-group {
+  display: flex;
+  flex-direction: column;
+}
+
 .correct-wrong {
   display: flex;
   flex-direction: row;
