@@ -13,9 +13,17 @@
 
 <body>
     <header>
-        <p>Flagify v1.11</p>
-        <!-- Trigger/Open The HighScore Modal -->
-        <a href="#" id="highScoreBtn">High Scores</a>
+        <div class="header-top">
+            <div>
+                <p>Flagify v1.12</p>
+                <!-- Trigger/Open The HighScore Modal -->
+                <a href="#" id="highScoreBtn">High Scores</a>
+            </div>
+            <div class="name-input-group">
+                <label for="username">Your Name</label>
+                <input id="name-input" type="text" id="username" value="Guest" onchange="assignName(this);">
+            </div>
+        </div>
         <h2 id="round-count">Round </h2>
         <div class="correct-wrong">
             <h3 id="left-count">Left: 0</h3>
