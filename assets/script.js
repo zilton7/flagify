@@ -361,7 +361,6 @@ let data = [
   { tld: "tz", name: "Tanzania" },
   { tld: "ua", name: "Ukraine" },
   { tld: "ug", name: "Uganda" },
-  { tld: "uk", name: "United Kingdom" },
   { tld: "us", name: "United States of America" },
   { tld: "uy", name: "Uruguay" },
   { tld: "uz", name: "Uzbekistan" },
