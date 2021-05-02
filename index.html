@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/modal.css">
     <link rel="shortcut icon" type="image/jpg" href="./assets/favicon.ico" />
-    <title>Flagify</title>
+    <title>Flagify - How much of a Flagman are You?</title>
 </head>
 
 <body>
@@ -35,8 +36,73 @@
                 <span id="variant-4" class="variant" onclick="checkChoice(this);"></span>
             </div>
         </div>
+
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Open Modal</button>
+
+        <!-- The Modal -->
+        <div id="highScoreModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+            </div>
+
     </main>
+
+    <!-- main script file -->
     <script src="./assets/script.js"></script>
+    <script src="./assets/modal.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyB9TuSkM4079iYYteoMX68Jw0uaVmPZRSA",
+            authDomain: "flagify7.firebaseapp.com",
+            projectId: "flagify7",
+            storageBucket: "flagify7.appspot.com",
+            messagingSenderId: "176477048103",
+            appId: "1:176477048103:web:86f48ffc69b67826bb2d02",
+            measurementId: "G-VZJ93HS5HZ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        var db = firebase.firestore();
+
+    </script>
+
+    <!-- <script>
+        // Add a new document in collection "cities"
+        db.collection("high-scores").doc(generate_string()).set({
+            username: 'Tom',
+            correct: 102,
+            wrong: 0
+        })
+            .then(() => {
+                console.log("Document successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+
+    </script> -->
+
+
 </body>
 
 </html>

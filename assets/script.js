@@ -4,6 +4,7 @@ let variants = [];
 let round = 0;
 let correct_count = 0;
 let wrong_count = 0;
+let high_scores;
 
 function startGame() {
   round++;
@@ -106,6 +107,17 @@ function nextRound() {
   });
 }
 
+// High Scores
+function readHighScores() {
+  db.collection("high-scores")
+    .get()
+    .then((querySnapshot) => {
+      high_scores = querySnapshot;
+    });
+}
+
+function assignHighScores() {}
+
 // Stopwatch
 // https://www.ostraining.com/blog/coding/stopwatch/
 
@@ -132,8 +144,13 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
+const generate_string = () => {
+  return Math.random().toString(32).substr(2, 22);
+};
+
+// Top Scores
+
 // https://www.countries-ofthe-world.com/TLD-list.html
-// Flags to fix: dk,se,sk mo?, remove: uk
 // Data object
 let data = [
   { tld: "ad", name: "Andorra" },
