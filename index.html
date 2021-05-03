@@ -12,41 +12,54 @@
 </head>
 
 <body>
-    <header>
-        <div class="header-top">
-            <div>
-                <p>Flagify v1.13</p>
-                <!-- Trigger/Open The HighScore Modal -->
-                <a href="#" id="highScoreBtn">High Scores</a>
+    <div id="game-screen">
+        <header>
+            <div class="header-top">
+                <div>
+                    <p>Flagify v1.13</p>
+                    <!-- Trigger/Open The HighScore Modal -->
+                    <a href="#" id="highScoreBtn">High Scores</a>
+                </div>
+                <div class="name-input-group">
+                    <label for="username">Your Name</label>
+                    <input id="name-input" type="text" id="username" value="Guest" onchange="assignName(this);">
+                </div>
             </div>
+            <h2 id="round-count">Round </h2>
+            <div class="correct-wrong">
+                <h3 id="left-count">Left: 0</h3>
+                <h3 id="correct-count">Correct: 0</h3>
+            </div>
+        </header>
+        <main>
+            <div class="flag">
+                <img id="flag-image" src="" alt="">
+            </div>
+            <div class="response" id="response-div"></div>
+            <div class="variants">
+                <div class="variants-top">
+                    <span id="variant-1" class="variant" onclick="checkChoice(this);"></span>
+                    <span id="variant-2" class="variant" onclick="checkChoice(this);"></span>
+                </div>
+                <div class="variants-bottom">
+                    <span id="variant-3" class="variant" onclick="checkChoice(this);"></span>
+                    <span id="variant-4" class="variant" onclick="checkChoice(this);"></span>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="start-screen">
+        <header>
+            <h2 id="welcome">Welcome, to Flagify!</h2>
+        </header>
+        <main>
             <div class="name-input-group">
                 <label for="username">Your Name</label>
                 <input id="name-input" type="text" id="username" value="Guest" onchange="assignName(this);">
+                <button id="start-game" onclick='startGame();'>Start Game</button>
             </div>
-        </div>
-        <h2 id="round-count">Round </h2>
-        <div class="correct-wrong">
-            <h3 id="left-count">Left: 0</h3>
-            <h3 id="correct-count">Correct: 0</h3>
-        </div>
-    </header>
-    <main>
-        <div class="flag">
-            <img id="flag-image" src="" alt="">
-        </div>
-        <div class="response" id="response-div"></div>
-        <div class="variants">
-            <div class="variants-top">
-                <span id="variant-1" class="variant" onclick="checkChoice(this);"></span>
-                <span id="variant-2" class="variant" onclick="checkChoice(this);"></span>
-            </div>
-            <div class="variants-bottom">
-                <span id="variant-3" class="variant" onclick="checkChoice(this);"></span>
-                <span id="variant-4" class="variant" onclick="checkChoice(this);"></span>
-            </div>
-        </div>
-    </main>
-
+        </main>
+    </div>
     <!-- The Modal -->
     <div id="highScoreModal" class="modal">
 

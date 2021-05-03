@@ -48,6 +48,10 @@ header h2 {
   color: red;
 }
 
+.start-screen {
+  /* display: none; */
+}
+
 main {
   width: 50%;
   height: 85%;

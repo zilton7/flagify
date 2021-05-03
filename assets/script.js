@@ -9,8 +9,20 @@ let total_high_scores;
 let lives = 1;
 let player = "Guest";
 
+function startScreen(game_over = false) {
+  if (game_over) {
+    document.getElementById("welcome").innerHTML = "GAME OVER";
+    document.getElementById("start-game").innerHTML = "Play Agian?";
+  }
+  document.getElementById("game-screen").style.display = "none";
+  document.getElementById("start-screen").style.visibility = "visible";
+}
+
 function startGame() {
   readHighScores();
+  document.getElementById("game-screen").style.display = "initial";
+  document.getElementById("start-screen").style.visibility = "hidden";
+  document.getElementById("name-input").value = player;
   gameLoop();
 }
 
@@ -26,7 +38,7 @@ function gameLoop() {
 }
 
 function gameOver() {
-  document.getElementsByTagName("main")[0].innerHTML = "<h3>GAME OVER</h3>";
+  startScreen((game_over = true));
   isHighScore();
 }
 
@@ -507,4 +519,4 @@ let data = [
   { tld: "zw", name: "Zimbabwe" },
 ];
 
-startGame();
+startScreen();
