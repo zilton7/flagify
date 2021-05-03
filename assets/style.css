@@ -23,6 +23,10 @@ header h2 {
   color: white;
 }
 
+a {
+  font-size: 2rem;
+}
+
 .header-top {
   display: flex;
   justify-content: space-between;

@@ -16,6 +16,9 @@ function startScreen(game_over = false) {
   }
   document.getElementById("game-screen").style.display = "none";
   document.getElementById("start-screen").style.visibility = "visible";
+  lives = 1;
+  round = 0;
+  correct_count = 0;
 }
 
 function startGame() {
@@ -32,14 +35,15 @@ function gameLoop() {
     variants = [];
     assignRoundData();
     assignData(gatherAnswerVariants(data));
+    console.log(correct_count);
   } else {
     gameOver();
   }
 }
 
 function gameOver() {
-  startScreen((game_over = true));
   isHighScore();
+  startScreen((game_over = true));
 }
 
 function assignRoundData() {
@@ -158,7 +162,6 @@ function sortHighScores(arr) {
   });
   last_high_score = res[res.length - 1];
   total_high_scores = res.length;
-  console.log(total_high_scores);
   return res;
 }
 
