@@ -3,7 +3,6 @@ let correct_index; // save the index to be able to remove it from data list
 let variants = [];
 let round = 0;
 let correct_count = 0;
-let wrong_count = 0;
 let high_scores = [];
 let last_high_score;
 let total_high_scores;
@@ -36,7 +35,6 @@ function assignRoundData() {
   document.getElementById(
     "correct-count"
   ).innerHTML = `Correct: ${correct_count}`;
-  document.getElementById("wrong-count").innerHTML = `Wrong: ${wrong_count}`;
   document.getElementById("left-count").innerHTML = `Left: ${data.length}`;
 }
 
@@ -82,7 +80,6 @@ function checkChoice(event) {
   } else {
     assignResponse("false");
     event.classList.add("variant-red");
-    wrong_count++;
     lives--;
     nextRound();
   }
@@ -136,7 +133,7 @@ function readHighScores() {
           id: doc.id,
           username: doc.data().username,
           correct: doc.data().correct,
-          wrong: doc.data().wrong,
+          date: doc.data().created_at,
         });
       });
       assignHighScores();
@@ -157,7 +154,7 @@ function isHighScore() {
   let current_player = {
     username: player,
     correct: correct_count,
-    wrong: wrong_count,
+    created_at: getDate(),
   };
   if (total_high_scores < 10) {
     alert(`high score!!! because less than 10 ${total_high_scores}`);
@@ -206,10 +203,10 @@ function assignHighScores() {
   let iter = 1;
   table.innerHTML = "";
   table.innerHTML =
-    "<thead><tr><th>#</th><th>Username</th><th>Correct</th><th>Wrong</th></tr></thead>";
+    "<thead><tr><th>#</th><th>Username</th><th>Correct</th><th>Date</th></tr></thead>";
   high_scores.forEach((score) => {
     table.innerHTML += `<tr><td>${iter}</td><td>${score.username}</td>
-  <td>${score.correct}</td><td>${score.wrong}</td></tr>`;
+  <td>${score.correct}</td><td>${score.date}</td></tr>`;
     iter++;
   });
 }
@@ -247,6 +244,21 @@ const sleep = (milliseconds) => {
 const generate_string = () => {
   return Math.random().toString(32).substr(2, 22);
 };
+
+function getDate() {
+  let today = new Date();
+  let date =
+    today.getFullYear() +
+    "-" +
+    ("0" + (today.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("0" + today.getDate()).slice(-2);
+  let time =
+    +("0" + today.getHours()).slice(-2) +
+    ":" +
+    ("0" + today.getMinutes()).slice(-2);
+  return date + " " + time;
+}
 
 // https://www.countries-ofthe-world.com/TLD-list.html
 // Data object
