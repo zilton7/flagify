@@ -6,6 +6,7 @@ let correct_count = 0;
 let wrong_count = 0;
 let high_scores = [];
 let last_high_score;
+let total_high_scores;
 let lives = 1;
 let player = "Guest";
 
@@ -147,25 +148,27 @@ function sortHighScores(arr) {
     return b.correct - a.correct;
   });
   last_high_score = res[res.length - 1];
+  total_high_scores = res.length;
+  console.log(total_high_scores);
   return res;
 }
 
 function isHighScore() {
-  let sort_arr = [
-    last_high_score,
-    { username: player, correct: correct_count, wrong: wrong_count },
-  ];
-  let sorted_array = sortHighScores(sort_arr);
-  if (high_scores.length >= 10) {
-    if (sort_arr[0] === sorted_array[0]) {
-      alert("no high score");
-    } else {
-      alert("high score!!!");
-      updateHighScore(sort_arr[1]);
-    }
+  let current_player = {
+    username: player,
+    correct: correct_count,
+    wrong: wrong_count,
+  };
+  if (total_high_scores < 10) {
+    alert(`high score!!! because less than 10 ${total_high_scores}`);
+    addHighScore(current_player);
   } else {
-    alert("high score!!!");
-    updateHighScore(sort_arr[1]);
+    if (current_player.correct > last_high_score.correct) {
+      alert("high score!!! because more than 10th record");
+      updateHighScore(current_player);
+    } else {
+      alert("no high score");
+    }
   }
 }
 
@@ -174,6 +177,19 @@ function updateHighScore(replacement) {
   db.collection("high-scores")
     .doc(last_high_score.id)
     .set(replacement)
+    .then(() => {
+      console.log("Document successfully written!");
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    });
+}
+
+function addHighScore(data_obj) {
+  // Add a new document in collection "cities"
+  db.collection("high-scores")
+    .doc(generate_string())
+    .set(data_obj)
     .then(() => {
       console.log("Document successfully written!");
     })
