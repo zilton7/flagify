@@ -1,6 +1,7 @@
 # Flagify
+![screenshot](./app_screenshot.png)
 
-Flagify is a simple vanilla JavaScript country flag guessing game.
+Flagify is a simple vanilla JavaScript country flag guessing game, using firebase to store high scores.
 
 
 ## Usage
