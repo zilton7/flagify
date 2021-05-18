@@ -1,5 +1,5 @@
 # Flagify
-![screenshot](./app_screenshot.png)
+![screenshot](./app-screenshot.png)
 
 Flagify is a simple vanilla JavaScript country flag guessing game, using firebase to store high scores.
 
